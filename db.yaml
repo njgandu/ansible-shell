@@ -3,10 +3,10 @@
   become: yes
   vars:
     login_host: db.gandu.tech
-  #vars_prompt: 
-  #- name: "mysql_root_password" 
-    #prompt: enter db password 
-    #private: no
+  vars_prompt: 
+  - name: "mysql_root_password" 
+    prompt: enter db password 
+    private: no
   tasks: 
   - name: installing mysql-server
     ansible.builtin.dnf:
@@ -38,4 +38,4 @@
              
   - name: setup root password
     ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
-    when: mysql_connection_output.failed is true # don't give {{ }} in when condition  
+    #when: mysql_connection_output.failed is true # don't give {{ }} in when condition  
