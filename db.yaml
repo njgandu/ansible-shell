@@ -2,7 +2,7 @@
   hosts: db 
   become: yes
   vars:
-    login_host= db.gandu.tech
+    login_host: db.gandu.tech
   vars_prompt: 
   - name: "mysql_root_password" 
     prompt: enter db password 
