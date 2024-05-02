@@ -3,7 +3,7 @@
   become: yes
   tasks: 
   - name: installing mysql-server
-    ansible.biultin.dnf:
+    ansible.builtin.dnf:
       name: mysql-server
       state: latest
   - name: starting and enabling db server
