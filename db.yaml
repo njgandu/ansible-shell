@@ -13,10 +13,10 @@
       enable: yes    
   - name: install python mysql dependencies
     ansible.builtin.pip:
-      name:
-      - PyMySQL
-      - cryptography
-      executable: pip3.9    
+       name:
+       - PyMySQL
+       - cryptography
+       executable: pip3.9    
   - name: setup root password
     ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
     when: mysql_connection_output.failed is true # don't give {{ }} in when condition    
