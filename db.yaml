@@ -23,12 +23,19 @@
        - PyMySQL
        - cryptography
        executable: pip3.9 
-  - name: setup root password
-    ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
-    #when: mysql_connection_output.failed is true # don't give {{ }} in when condition       
+         
   - name: check DB connection
     community.mysql.mysql_info:
+      login_host: "{{ login_host }}" 
       login_user: root
       login_password: "{{ mysql_root_password }}"
-      login_host: "{{ login_host }}"        
-    
+      ignore_error: yes
+      register: mysql_connection_output 
+
+  - name: print connection output  
+    ansible.builtin.debug:
+      msg: "output is {{mysql_connection_ouput}}"  
+             
+ # - name: setup root password
+    ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ mysql_root_password }}"
+    when: mysql_connection_output.failed is true # don't give {{ }} in when condition  
